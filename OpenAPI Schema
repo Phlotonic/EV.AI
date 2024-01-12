@@ -1,0 +1,50 @@
+openapi: 3.0.0
+info:
+  title: EV.AI API
+  description: AI-driven solution for electric vehicle retrofitting.
+  version: 1.0.0
+servers:
+  - url: https://api.ev.ai/v1
+    description: Main API server for EV.AI
+
+paths:
+  /vehicleAnalysis:
+    post:
+      operationId: analyzeVehicle
+      summary: Analyzes the internal structure of a combustible gas vehicle.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                vehicleDetails:
+                  type: object
+                  properties:
+                    make:
+                      type: string
+                    model:
+                      type: string
+                    year:
+                      type: string
+                    images:
+                      type: array
+                      items:
+                        type: string
+                        format: binary
+      x-openai-isConsequential: false
+
+  /retrofitInstructions:
+    get:
+      operationId: getRetrofitInstructions
+      summary: Provides detailed instructions for retrofitting a specific vehicle.
+      parameters:
+        - name: vehicleId
+          in: query
+          required: true
+          schema:
+            type: string
+      x-openai-isConsequential: false
+
+# Note: This is a basic structure. Further details and paths can be added based on specific functionalities of the EV.AI system.
